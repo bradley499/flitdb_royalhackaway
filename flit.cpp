@@ -29,6 +29,11 @@ int insert(flitdb &handler, int64_t column_position, int64_t row_position, char*
 	handler.insert_value(value);
 	return handler.insert_at(column_position, row_position);
 }
+int insert(flitdb &handler, int64_t column_position, int64_t row_position, bool value)
+{
+	handler.insert_value(value);
+	return handler.insert_at(column_position, row_position);
+}
 int extract(flitdb &handler, int64_t column_position, int64_t row_position)
 {
 	return handler.read_at(column_position, row_position);

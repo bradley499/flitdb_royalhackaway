@@ -60,4 +60,11 @@ int flitdb::insert_value(char* set_value)
 	value.char_value = set_value;
 }
 
+int flitdb::insert_value(bool set_value)
+{
+	clear_values();
+	value_type = 5;
+	value.char_value = set_value;
+}
+
 #endif

@@ -35,6 +35,7 @@ int insert(flitdb &handler, int64_t column_position, int64_t row_position, int64
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, double value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, float value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, char* value);
+int insert(flitdb &handler, int64_t column_position, int64_t row_position, bool value);
 int extract(flitdb &handler, int64_t column_position, int64_t row_position);
 
 #endif
