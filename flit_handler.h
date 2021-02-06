@@ -16,6 +16,7 @@ private:
 		double double_value;
 		float float_value;
 		char char_value[10000];
+		float bool_value;
 	} value;
 	unsigned char value_type = 0;
 	void clear_values();

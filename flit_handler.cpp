@@ -69,6 +69,13 @@ int flitdb::insert_value(char *set_value)
 	strncpy(value.char_value, set_value, sizeof(value.char_value));
 }
 
+int flitdb::insert_value(bool set_value)
+{
+	clear_values();
+	value_type = 5;
+	value.bool_value = set_value;
+}
+
 int flitdb::read_at(unsigned short column_position, unsigned short row_position)
 {
 	if (column_position == 0 || column_position > 1000)
@@ -191,7 +198,7 @@ int flitdb::read_at(unsigned short column_position, unsigned short row_position)
 				strncpy(value.char_value, response_value, sizeof(value.char_value));
 				break;
 			case 5:
-				value.int_value = (response_value[0] == '1');
+				value.bool_value = (response_value[0] == '1');
 				break;
 			default:
 				break;
@@ -202,13 +209,6 @@ int flitdb::read_at(unsigned short column_position, unsigned short row_position)
 		offset += response_length;
 	}
 	return FLITDB_DONE;
-}
-
-int flitdb::insert_value(bool set_value)
-{
-	clear_values();
-	value_type = 5;
-	value.char_value = set_value;
 }
 
 #endif
