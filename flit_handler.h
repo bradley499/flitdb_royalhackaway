@@ -26,7 +26,7 @@ public:
 	int setup(const char *filename, int flags);
 	int read_at(unsigned short column_position, unsigned short row_position);
 	int insert_at(unsigned short column_position, unsigned short row_position);
-	int insert_value(unsigned long set_value);
+	int insert_value(signed long set_value);
 	int insert_value(double set_value);
 	int insert_value(float set_value);
 	int insert_value(char* set_value);
