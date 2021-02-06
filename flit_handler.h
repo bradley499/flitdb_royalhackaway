@@ -32,10 +32,10 @@ public:
 	int insert_value(char* set_value);
 	int insert_value(bool set_value);
 	int retrieve_value_int();
-	int retrieve_value_double();
-	int retrieve_value_float();
-	int retrieve_value_char();
-	int retrieve_value_bool();
+	double retrieve_value_double();
+	float retrieve_value_float();
+	char* retrieve_value_char();
+	bool retrieve_value_bool();
 };
 
 #include "flit.h"

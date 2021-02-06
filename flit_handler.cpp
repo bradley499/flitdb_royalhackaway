@@ -26,7 +26,9 @@ void flitdb::clear_values()
 	value.int_value = 0;
 	value.double_value = 0;
 	value.float_value = 0;
+	value.bool_value = false;
 	strncpy(value.char_value, "\0", sizeof(value.char_value));
+	value_type = 0;
 }
 
 int flitdb::setup(const char *filename, int flags)
@@ -43,6 +45,11 @@ int flitdb::setup(const char *filename, int flags)
 
 int flitdb::insert_value(unsigned long set_value)
 {
+	if (value_type != 0)
+	{
+		err_message = "Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
 	clear_values();
 	value_type = 1;
 	value.int_value = set_value;
@@ -50,6 +57,11 @@ int flitdb::insert_value(unsigned long set_value)
 
 int flitdb::insert_value(double set_value)
 {
+	if (value_type != 0)
+	{
+		err_message = "Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
 	clear_values();
 	value_type = 2;
 	value.double_value = set_value;
@@ -57,6 +69,11 @@ int flitdb::insert_value(double set_value)
 
 int flitdb::insert_value(float set_value)
 {
+	if (value_type != 0)
+	{
+		err_message = "Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
 	clear_values();
 	value_type = 3;
 	value.float_value = set_value;
@@ -64,6 +81,11 @@ int flitdb::insert_value(float set_value)
 
 int flitdb::insert_value(char *set_value)
 {
+	if (value_type != 0)
+	{
+		err_message = "Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
 	clear_values();
 	value_type = 4;
 	strncpy(value.char_value, set_value, sizeof(value.char_value));
@@ -71,6 +93,11 @@ int flitdb::insert_value(char *set_value)
 
 int flitdb::insert_value(bool set_value)
 {
+	if (value_type != 0)
+	{
+		err_message = "Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
 	clear_values();
 	value_type = 5;
 	value.bool_value = set_value;
@@ -103,12 +130,7 @@ bool flitdb::retrieve_value_bool()
 
 int flitdb::read_at(unsigned short column_position, unsigned short row_position)
 {
-	if (column_position == 0 || column_position > 1000)
-	{
-		err_message = "The requested range was outside of the database's range";
-		return FLITDB_RANGE;
-	}
-	if (row_position == 0 || row_position > 1000)
+	if (column_position == 0 || column_position > 1000 || row_position == 0 || row_position > 1000)
 	{
 		err_message = "The requested range was outside of the database's range";
 		return FLITDB_RANGE;
