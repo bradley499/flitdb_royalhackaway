@@ -204,4 +204,11 @@ int flitdb::read_at(unsigned short column_position, unsigned short row_position)
 	return FLITDB_DONE;
 }
 
+int flitdb::insert_value(bool set_value)
+{
+	clear_values();
+	value_type = 5;
+	value.char_value = set_value;
+}
+
 #endif

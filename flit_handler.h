@@ -29,6 +29,7 @@ public:
 	int insert_value(double set_value);
 	int insert_value(float set_value);
 	int insert_value(char* set_value);
+	int insert_value(bool set_value);
 };
 
 #include "flit.h"
