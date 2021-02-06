@@ -4,6 +4,16 @@
 
 #include "flit_handler.h"
 
+flitdb::flitdb()
+{
+	configured = false;
+	err_message = "\0";
+}
+
+flitdb::~flitdb()
+{
+}
+
 int flitdb::setup(const char *filename, int flags)
 {
 	if (configured)
