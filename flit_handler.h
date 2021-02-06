@@ -16,7 +16,7 @@ private:
 		double double_value;
 		float float_value;
 		char char_value[10000];
-		float bool_value;
+		bool bool_value;
 	} value;
 	unsigned char value_type = 0;
 	void clear_values();
@@ -31,6 +31,11 @@ public:
 	int insert_value(float set_value);
 	int insert_value(char* set_value);
 	int insert_value(bool set_value);
+	int retrieve_value_int();
+	int retrieve_value_double();
+	int retrieve_value_float();
+	int retrieve_value_char();
+	int retrieve_value_bool();
 };
 
 #include "flit.h"

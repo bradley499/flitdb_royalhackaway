@@ -76,6 +76,31 @@ int flitdb::insert_value(bool set_value)
 	value.bool_value = set_value;
 }
 
+int flitdb::retrieve_value_int()
+{
+	return value.int_value;
+}
+
+double flitdb::retrieve_value_double()
+{
+	return value.double_value;
+}
+
+float flitdb::retrieve_value_float()
+{
+	return value.float_value;
+}
+
+char* flitdb::retrieve_value_char()
+{
+	return value.char_value;
+}
+
+bool flitdb::retrieve_value_bool()
+{
+	return value.bool_value;
+}
+
 int flitdb::read_at(unsigned short column_position, unsigned short row_position)
 {
 	if (column_position == 0 || column_position > 1000)

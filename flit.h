@@ -36,6 +36,11 @@ int insert(flitdb &handler, int64_t column_position, int64_t row_position, doubl
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, float value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, char* value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, bool value);
+int retrieve_value_int(flitdb &handler);
+double retrieve_value_double(flitdb &handler);
+float retrieve_value_float(flitdb &handler);
+char* retrieve_value_char(flitdb &handler);
+bool retrieve_value_bool(flitdb &handler);
 int extract(flitdb &handler, int64_t column_position, int64_t row_position);
 
 #endif
