@@ -304,4 +304,107 @@ int flitdb::read_at(unsigned short column_position, unsigned short row_position)
 	return FLITDB_NULL;
 }
 
+int flitdb::insert_at(unsigned short column_position, unsigned short row_position)
+{
+	if (column_position == 0 || column_position > 1000 || row_position == 0 || row_position > 1000)
+	{
+		err_message = (char *)"The requested range was outside of the database's range";
+		return FLITDB_RANGE;
+	}
+	row_position -= 1;
+	bool store_response = false;
+	size_t offset = 0;
+	size_t skip_offset = 0;
+	unsigned char read_length = 15;
+	unsigned short row_count = 0;
+	unsigned short row_position_count = 0;
+	size_t current_length = 0;
+	size_t insert_position = 0;
+	while (true)
+	{
+		insert_position += offset;
+		strncpy(buffer, "\0", sizeof(buffer));
+		ssize_t read_status = pread64(file_descriptor, &buffer, read_length, offset);
+		offset += read_length;
+		if (read_status == -1)
+		{
+			err_message = (char *)"An error occurred in attempting to read data from the database\0";
+			return FLITDB_ERROR;
+		}
+		else if (read_status < read_length)
+		{
+			err_message = (char *)"The database contracted a malformed structure request\0";
+			return FLITDB_CORRUPT;
+		}
+		if (read_length == 15)
+		{
+			char *skip_amount_read = new char[4];
+			skip_amount_read[0] = buffer[0];
+			skip_amount_read[1] = buffer[1];
+			skip_amount_read[2] = buffer[2];
+			skip_amount_read[3] = buffer[3];
+			skip_offset += (atoi(skip_amount_read) + 1);
+			delete skip_amount_read;
+			if (skip_offset > column_position)
+				return FLITDB_DONE;
+			char *row_count_read = new char[3];
+			row_count_read[0] = buffer[4];
+			row_count_read[1] = buffer[5];
+			row_count_read[2] = buffer[6];
+			row_count = atoi(row_count_read);
+			row_position_count = 0;
+			delete row_count_read;
+		}
+		unsigned char set_read_length = 15;
+		if (skip_offset == column_position)
+		{
+			if (row_count < row_position)
+				return FLITDB_DONE;
+			char position_read[3];
+			position_read[0] = buffer[(read_length < 15) ? 0 : 7];
+			position_read[1] = buffer[(read_length < 15) ? 1 : 8];
+			position_read[2] = buffer[(read_length < 15) ? 2 : 9];
+			unsigned short position = atoi(position_read);
+			if (position == row_position)
+			{
+				store_response = true;
+				row_count = 0;
+			}
+		}
+		else if (read_length != read_length)
+		{
+			err_message = (char *)"A database coordination offset error occurred\0";
+			return FLITDB_ERROR;
+		}
+		else if (row_position_count == row_count)
+			row_count = 0;
+		row_position_count += 1;
+		if (row_count > 1)
+			set_read_length = 8;
+		char *response_length_read = new char[4];
+		response_length_read[0] = buffer[(read_length < 15) ? 3 : 10];
+		response_length_read[1] = buffer[(read_length < 15) ? 4 : 11];
+		response_length_read[2] = buffer[(read_length < 15) ? 5 : 12];
+		response_length_read[3] = buffer[(read_length < 15) ? 6 : 13];
+		unsigned short response_length = atoi(response_length_read);
+		delete response_length_read;
+		if (response_length_read == 0)
+		{
+			err_message = (char *)"A reference to an imposed data declaration holds no length\0";
+			return FLITDB_CORRUPT;
+		}
+		if (store_response)
+		{
+			current_length = response_length;
+			break;		
+		}
+		read_length = set_read_length;
+		offset += response_length;
+	}
+	struct stat stat_buf;
+    int rc = fstat(file_descriptor, &stat_buf);
+    size_t bytes_to_move = (((rc == 0) ? stat_buf.st_size : 0) - insert_position);
+	return FLITDB_NULL;
+}
+
 #endif
