@@ -24,6 +24,9 @@ typedef signed long int64_t;
 #define FLITDB_CORRUPT 		5 // The database file is malformed
 #define FLITDB_RANGE 		6 // The requested range is outside the range of the database
 #define FLITDB_DONE 		7 // The operation was completed successfully
+#define FLITDB_NULL		8 // Create a database if not existent
+#define FLITDB_CREATE		9 // Create a database if not existent
+#define FLITDB_READONLY		10 // Only allow the reading of the database
 
 // Functions
 // =========
