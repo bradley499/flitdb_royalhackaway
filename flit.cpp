@@ -9,7 +9,7 @@ int setup(const char *filename, flitdb &handler, int flags)
 	return handler.setup(filename, flags);
 }
 
-int insert(flitdb &handler, int64_t column_position, int64_t row_position, int64_t value)
+int insert(flitdb &handler, int64_t column_position, int64_t row_position, int value)
 {
 	handler.insert_value(value);
 	return handler.insert_at(column_position, row_position);

@@ -12,7 +12,7 @@ private:
 	char* err_message;
 	struct value
 	{
-		int64_t int_value;
+		int int_value;
 		double double_value;
 		float float_value;
 		char char_value[10000];
@@ -20,13 +20,14 @@ private:
 	} value;
 	unsigned char value_type = 0;
 	void clear_values();
+	size_t size = 0;
 public:
 	flitdb();
 	~flitdb();
 	int setup(const char *filename, int flags);
 	int read_at(unsigned short column_position, unsigned short row_position);
 	int insert_at(unsigned short column_position, unsigned short row_position);
-	int insert_value(signed long set_value);
+	int insert_value(int set_value);
 	int insert_value(double set_value);
 	int insert_value(float set_value);
 	int insert_value(char* set_value);

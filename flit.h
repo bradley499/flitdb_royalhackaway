@@ -24,7 +24,7 @@ typedef signed long int64_t;
 #define FLITDB_CORRUPT 		5 // The database file is malformed
 #define FLITDB_RANGE 		6 // The requested range is outside the range of the database
 #define FLITDB_DONE 		7 // The operation was completed successfully
-#define FLITDB_NULL		8 // Create a database if not existent
+#define FLITDB_NULL			8 // Create a database if not existent
 #define FLITDB_CREATE		9 // Create a database if not existent
 #define FLITDB_READONLY		10 // Only allow the reading of the database
 
@@ -34,7 +34,7 @@ typedef signed long int64_t;
 // Parameters: Database handler, plot reference x, plot reference y, etc.
 
 int setup(const char *filename, flitdb &handler, int flags);
-int insert(flitdb &handler, int64_t column_position, int64_t row_position, int64_t value);
+int insert(flitdb &handler, int64_t column_position, int64_t row_position, int value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, double value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, float value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, char* value);
