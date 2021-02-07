@@ -36,6 +36,7 @@ typedef signed long int64_t;
 int setup(const char *filename, flitdb &handler, int flags);
 int extract(flitdb &handler, int64_t column_position, int64_t row_position);
 int type(flitdb &handler, int64_t column_position, int64_t row_position);
+char* err_message(flitdb &handler);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, int64_t value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, double value);
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, float value);

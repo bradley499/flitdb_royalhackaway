@@ -24,6 +24,7 @@ public:
 	flitdb();
 	~flitdb();
 	int setup(const char *filename, int flags);
+	char* err_message();	
 	int read_at(unsigned short column_position, unsigned short row_position);
 	int insert_at(unsigned short column_position, unsigned short row_position);
 	int insert_value(signed long set_value);

@@ -9,6 +9,11 @@ int setup(const char *filename, flitdb &handler, int flags)
 	return handler.setup(filename, flags);
 }
 
+char* err_message(flitdb &handler) 
+{
+	return handler.err_message();
+}
+
 int insert(flitdb &handler, int64_t column_position, int64_t row_position, int64_t value)
 {
 	handler.insert_value(value);

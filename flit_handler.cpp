@@ -51,6 +51,11 @@ int flitdb::setup(const char *filename, int flags)
 	return FLITDB_SUCCESS;
 }
 
+char* flitdb::err_message()
+{
+	return err_message;
+}
+
 int flitdb::insert_value(signed long set_value)
 {
 	if (value_type != 0)
