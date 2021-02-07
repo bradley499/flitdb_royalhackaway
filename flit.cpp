@@ -34,33 +34,37 @@ int insert(flitdb &handler, int64_t column_position, int64_t row_position, bool 
 	handler.insert_value(value);
 	return handler.insert_at(column_position, row_position);
 }
-
-int retrieve_value_int(flitdb &handler)
+int retrieve_int(flitdb &handler)
 {
 	return handler.retrieve_value_int();
 }
 
-double retrieve_value_double(flitdb &handler)
+double retrieve_double(flitdb &handler)
 {
 	return handler.retrieve_value_double();
 }
 
-float retrieve_value_float(flitdb &handler)
+float retrieve_float(flitdb &handler)
 {
 	return handler.retrieve_value_float();
 }
 
-char* retrieve_value_char(flitdb &handler)
+char* retrieve_char(flitdb &handler)
 {
 	return handler.retrieve_value_char();
 }
 
-bool retrieve_value_bool(flitdb &handler)
+bool retrieve_bool(flitdb &handler)
 {
 	return handler.retrieve_value_bool();
 }
 
 int extract(flitdb &handler, int64_t column_position, int64_t row_position)
+{
+	return handler.read_at(column_position, row_position);
+}
+
+int type(flitdb &handler, int64_t column_position, int64_t row_position)
 {
 	return handler.read_at(column_position, row_position);
 }
