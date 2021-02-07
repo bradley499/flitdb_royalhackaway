@@ -31,6 +31,11 @@ public:
 	int insert_value(float set_value);
 	int insert_value(char* set_value);
 	int insert_value(bool set_value);
+	int drop_value(signed long set_value);
+	int drop_value(double set_value);
+	int drop_value(float set_value);
+	int drop_value(char* set_value);
+	int drop_value(bool set_value);
 	int retrieve_value_int();
 	double retrieve_value_double();
 	float retrieve_value_float();

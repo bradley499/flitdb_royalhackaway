@@ -116,6 +116,72 @@ int flitdb::insert_value(bool set_value)
 	return FLITDB_DONE;
 }
 
+int flitdb::drop_value(signed long set_value)
+{
+	if (value_type != 0)
+	{
+		err_message = (char *)"Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
+	clear_values();
+	value_type = 1;
+	value.bool_value = set_value;
+	return FLITDB_DONE;
+}
+
+int flitdb::drop_value(double set_value)
+{
+	if (value_type != 0)
+	{
+		err_message = (char *)"Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
+	clear_values();
+	value_type = 2;
+	value.bool_value = set_value;
+	return FLITDB_DONE;
+}
+
+int flitdb::drop_value(float set_value)
+{
+	if (value_type != 0)
+	{
+		err_message = (char *)"Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
+	clear_values();
+	value_type = 3;
+	value.bool_value = set_value;
+	return FLITDB_DONE;
+}
+
+int flitdb::drop_value(char* set_value)
+{
+	if (value_type != 0)
+	{
+		err_message = (char *)"Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
+	clear_values();
+	value_type = 4;
+	value.bool_value = set_value;
+	return FLITDB_DONE;
+}
+
+int flitdb::drop_value(bool set_value)
+{
+	if (value_type != 0)
+	{
+		err_message = (char *)"Data insertion avoided due to unexpected tennant";
+		return FLITDB_ERROR;
+	}
+	clear_values();
+	value_type = 5;
+	value.bool_value = set_value;
+	return FLITDB_DONE;
+}
+
+
 int flitdb::retrieve_value_int()
 {
 	int response_value = value.int_value;
