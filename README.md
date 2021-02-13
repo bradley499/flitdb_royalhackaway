@@ -19,3 +19,6 @@ Compile with this command:
 	g++ main.cpp -o build/flit_demo
 
 Then go into the build directory, and run the program in your terminal called `flit_demo`; this will allow you to run the demo of FlitDB.
+
+## Awards 🏆
+ - Grand Prize - Royal Hackaway v4
